@@ -14,7 +14,7 @@ class FetchCommand extends Command {
      *
      * @var string
      */
-    protected $name = 'translation:fetch';
+    protected $name = 'translation:fetch {--new}';
 
     /**
      * The console command description.
@@ -232,6 +232,11 @@ class FetchCommand extends Command {
             'updated_at' => date_create(),
         ]);
 
+        // Do not update translations when option --new is passed
+        if ($item !== null && $this->option("new")) {
+          return;
+        }
+
         if ($item === null) {
             $data = array_merge($data, [
                 'created_at' => date_create(),
@@ -273,5 +278,13 @@ class FetchCommand extends Command {
     protected function flushCache($locale, $group)
     {
         \Cache::forget('__translations.'.$locale.'.'.$group);
+    }
+
+    /**
+     * @return boolean
+     */
+    protected function onlyNew()
+    {
+      return $this->option("new") == true;
     }
 }
