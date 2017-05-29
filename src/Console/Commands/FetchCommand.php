@@ -14,7 +14,7 @@ class FetchCommand extends Command {
      *
      * @var string
      */
-    protected $name = 'translation:fetch {--new}';
+    protected $name = 'translation:fetch';
 
     /**
      * The console command description.
@@ -95,6 +95,7 @@ class FetchCommand extends Command {
         return [
             ['locale', 'l', InputOption::VALUE_OPTIONAL, 'Specify a locale.', null],
             ['group', 'g', InputOption::VALUE_OPTIONAL, 'Specify a group.', null],
+            ['only-new', 'on', InputOption::VALUE_NONE, 'Only fetch new translation keys.'],
         ];
     }
 
@@ -232,9 +233,9 @@ class FetchCommand extends Command {
             'updated_at' => date_create(),
         ]);
 
-        // Do not update translations when option --new is passed
-        if ($item !== null && $this->option("new")) {
-          return;
+        // Do not update translations when option --only-new is passed
+        if ($item !== null && $this->option("only-new")) {
+          return array($inserted, $updated);
         }
 
         if ($item === null) {
@@ -278,13 +279,5 @@ class FetchCommand extends Command {
     protected function flushCache($locale, $group)
     {
         \Cache::forget('__translations.'.$locale.'.'.$group);
-    }
-
-    /**
-     * @return boolean
-     */
-    protected function onlyNew()
-    {
-      return $this->option("new") == true;
     }
 }

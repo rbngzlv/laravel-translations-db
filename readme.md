@@ -100,9 +100,9 @@ This will import all available translations in language files into the database.
 > To import just some specifics you can also make use of the options ```--locale``` and ```--group```.
 
 If you only want to import new translation keys but not update the existing
-ones, pass `--new` as an option:
+ones, pass `--only-new` as an option:
 
-`$ php artisan translation:fetch --new`
+`$ php artisan translation:fetch --only-new`
 
 ### Export
 To dump the translations from your database back to your filesystem, use:
