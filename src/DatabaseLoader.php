@@ -41,6 +41,8 @@ class DatabaseLoader implements LoaderInterface {
      */
     public function addNamespace($namespace, $hint) {}
 
+    public function namespaces() {}
+
     /**
      * Adds a new translation to the database or
      * updates an existing record if the viewed_at
