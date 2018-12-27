@@ -1,7 +1,7 @@
 <?php namespace Hpolthof\Translation;
 
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Translation\LoaderInterface;
+use Illuminate\Contracts\Translation\Loader as LoaderInterface;
 
 class DatabaseLoader implements LoaderInterface {
 
