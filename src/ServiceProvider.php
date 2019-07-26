@@ -152,6 +152,6 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 			$result = $query->pluck($column, $key);
 		}
 
-		return $result;
+		return $result->toArray();
 	}
 }
